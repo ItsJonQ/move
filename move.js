@@ -2,28 +2,12 @@ const meMoveEvent = new Event('me:move')
 const MAX_THEM = 100
 let SCORE = 0
 
-document.body.style.position = 'relative'
-document.body.style.overflow = 'hidden'
-
 const Score = document.createElement('div')
-Score.style.position = 'fixed'
-Score.style.left = '0'
-Score.style.width = '100%'
-Score.style.textAlign = 'center'
-Score.style.bottom = '10px'
-Score.style.pointerEvents = 'none'
-Score.style.userSelect = 'none'
-Score.style.fontSize = '48px'
-Score.style.zIndex = '2'
+Score.classList.add('Score')
 document.body.append(Score)
 
 const Me = document.createElement('div')
-Me.style.width = '50px'
-Me.style.height = '50px'
-Me.style.borderRadius = '9999px'
-Me.style.backgroundColor = 'dodgerblue'
-Me.style.opacity = 0
-Me.style.willChange = 'transform'
+Me.classList.add('Entity', 'Me')
 document.body.append(Me)
 const MeBCR = Me.getBoundingClientRect()
 
@@ -45,17 +29,10 @@ const addThem = () => {
   themCount = themCount + 1
   if (themCount > MAX_THEM) return
   const Them = document.createElement('div')
-  Them.style.width = '50px'
-  Them.style.height = '50px'
-  Them.style.borderRadius = '9999px'
-  Them.style.backgroundColor = 'orangered'
-  Them.style.opacity = 0
-  Them.style.willChange = 'transform'
+  Them.classList.add('Entity', 'Them')
   Them.style.transitionDuration = `${getRandom(100, 5000)}ms`
-  Them.style.position = 'absolute'
   Them.style.top = `${getRandomScreenX()}px`
   Them.style.right = `${getRandomScreenY()}px`
-  Them.style.transitionTimingFunction = 'linear'
   Them.classList.add('them')
   document.body.append(Them)
   const BCR = Them.getBoundingClientRect()

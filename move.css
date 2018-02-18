@@ -1,7 +1,7 @@
 html, body {
+  cursor: none;
   margin: 0;
   padding: 0;
-  cursor: none;
 }
 
 html {
@@ -43,6 +43,7 @@ body {
   box-shadow: 
     0 0 300px white,
     0 0 100px rgba(255, 255, 255, 0.4);
+  transition: opacity 300ms ease;
 }
 
 .Them {

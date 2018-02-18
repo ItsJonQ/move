@@ -121,6 +121,7 @@ const destroyThem = (event) => {
     requestAnimationFrame(() => {
       document.body.removeChild(closestThem)
       themCount = themCount - 1
+      SCORE = SCORE + 1
       renderScore()
     })
   }
@@ -142,7 +143,6 @@ const resetThemCoords = () => {
 }
 
 const renderScore = () => {
-  SCORE = SCORE + 1
   Score.innerHTML = SCORE
 }
 

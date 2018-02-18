@@ -1,6 +1,8 @@
 const meMoveEvent = new Event('me:move')
 const MAX_THEM = 100
 let SCORE = 0
+let FASTEST_THEM = 400
+let SLOWEST_THEM = 5000
 
 const Score = document.createElement('div')
 Score.classList.add('Score')
@@ -30,7 +32,7 @@ const addThem = () => {
   if (themCount > MAX_THEM) return
   const Them = document.createElement('div')
   Them.classList.add('Entity', 'Them')
-  Them.style.transitionDuration = `${getRandom(100, 5000)}ms`
+  Them.style.transitionDuration = `${getRandom(FASTEST_THEM, SLOWEST_THEM)}ms`
   Them.style.top = `${getRandomScreenX()}px`
   Them.style.right = `${getRandomScreenY()}px`
   Them.classList.add('them')
@@ -53,7 +55,9 @@ const repositionMe = (event) => {
     const BCR = Me.getBoundingClientRect()
     Me.setAttribute('data-current-x', BCR.left)
     Me.setAttribute('data-current-y', BCR.top)
-    Me.dispatchEvent(meMoveEvent)
+    requestAnimationFrame(() => {
+      Me.dispatchEvent(meMoveEvent)
+    })
   })
 }
 
@@ -70,9 +74,6 @@ const repositionThem1 = (event) => {
     const tY = y - top
     requestAnimationFrame(() => {
       n.style.transform = `translate(${tX}px, ${tY}px)`
-      const BCR = n.getBoundingClientRect()
-      n.setAttribute('data-current-x', BCR.left)
-      n.setAttribute('data-current-y', BCR.top)
     })
   })
 }
@@ -117,28 +118,44 @@ const destroyThem = (event) => {
     })
 
   if (closestThem) {
-    document.body.removeChild(closestThem)
-    themCount = themCount - 1
-    SCORE = SCORE + 1
-    renderScore()
+    requestAnimationFrame(() => {
+      document.body.removeChild(closestThem)
+      themCount = themCount - 1
+      renderScore()
+    })
   }
 }
 
 const resetThemCoords = () => {
   let themNodes = Array.from(document.querySelectorAll('.them'))
   themNodes.map(n => {
-    const t = n.getAttribute('data-top')
-    const l = n.getAttribute('data-left')
-    const ot = n.offsetTop
-    const ol = n.offsetLeft
-    if (t === ot || l === ol) return
-    n.setAttribute('data-top', ot)
-    n.setAttribute('data-left', ol)
+    requestAnimationFrame(() => {
+      const t = n.getAttribute('data-top')
+      const l = n.getAttribute('data-left')
+      const ot = n.offsetTop
+      const ol = n.offsetLeft
+      if (t === ot || l === ol) return
+      n.setAttribute('data-top', ot)
+      n.setAttribute('data-left', ol)
+    })
   })
 }
 
 const renderScore = () => {
+  SCORE = SCORE + 1
   Score.innerHTML = SCORE
+}
+
+const adjustDifficulty = () => {
+  if (SCORE > 20) {
+    SLOWEST_THEM =- 1000
+  }
+  if (SCORE > 50) {
+    SLOWEST_THEM =- 1000
+  }
+  if (SCORE > 70) {
+    SLOWEST_THEM =- 1000
+  }
 }
 
 window.addEventListener('mousemove', repositionMe)

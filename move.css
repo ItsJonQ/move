@@ -26,6 +26,7 @@ body {
   text-align: center;
   user-select: none;
   width: 100%;
+  will-change: contents;
   z-index: 2;
 }
 
@@ -46,7 +47,6 @@ body {
 
 .Them {
   background-color: orangered;
-  box-shadow: 0 0 300px orangered;
   position: absolute;
   transition-timing-function: linear;
   z-index: 1;

@@ -1,0 +1,30 @@
+{
+  "name": "move",
+  "version": "1.0.0",
+  "description": "A game where you keep moving to stay alive.",
+  "main": "move.js",
+  "scripts": {
+    "clean": "rm -rf public",
+    "make": "mkdir public && mkdir public/js && mkdir public/css",
+    "copy": "cp src/index.html public/index.html && cp src/css/move.css public/css/move.css",
+    "start": "serve ./src",
+    "build:js": "babel ./src/js/move.js -o ./public/js/move.js",
+    "build": "npm run clean && npm run make && npm run copy && npm run build:js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ItsJonQ/move.git"
+  },
+  "author": "ItsJonQ <hello@jonquach.com> (https://jonquach.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ItsJonQ/move/issues"
+  },
+  "homepage": "https://github.com/ItsJonQ/move#readme",
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "mitt": "1.1.3",
+    "serve": "6.4.10"
+  }
+}

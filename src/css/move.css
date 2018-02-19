@@ -8,6 +8,11 @@ html {
   background: black;
 }
 
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
 body {
   color: white;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
@@ -33,22 +38,29 @@ body {
 .Entity {
   border-radius: 9999px;
   height: 50px;
+  left: 0;
   opacity: 0;
+  position: absolute;
+  top: 0;
   width: 50px;
   will-change: opacity, transform;
 }
 
 .Me {
   background-color: dodgerblue;
-  box-shadow: 
-    0 0 300px white,
-    0 0 100px rgba(255, 255, 255, 0.4);
-  transition: opacity 300ms ease;
+  box-shadow:
+    0 0 300px dodgerblue,
+    0 0 100px dodgerblue,
+    0 0 50px rgba(255, 255, 255, 0.4);
+  opacity: 1;
+  transition: opacity 200ms ease;
 }
 
 .Them {
   background-color: orangered;
-  position: absolute;
+  box-shadow:
+    0 0 300px orangered,
+    0 0 100px orangered;
   transition-timing-function: linear;
   z-index: 1;
 }

@@ -49,6 +49,7 @@ class Me extends Entity {
 
   fire (event) {
     if (!this.canFire) return
+    event.preventDefault()
     this.GEM.emit('meFire')
   }
 
